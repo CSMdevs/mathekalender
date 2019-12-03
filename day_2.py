@@ -1,3 +1,5 @@
+#Micha den Heijer
+
 import random
 def transfer(one, two, atoms, i):
     if one == two:

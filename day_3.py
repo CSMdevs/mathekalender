@@ -1,5 +1,6 @@
+#Cemre Süler
+
 ga_door = True
-#(1.1).is_integer()
 eind = 1
 while(ga_door):
     print(" ")

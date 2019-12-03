@@ -1,0 +1,17 @@
+#generates random x and y
+    randomY = random.randint(1,10)
+    randomX = random.randint(1,10)
+    random_goed == False
+    #checks if these values are already defined
+    while(random_goed == False):
+        if(randomX == 1 and randomY == 2 or randomY == 3 or randomY == 4):
+            randomY = random.randint(1,10)
+            randomX = random.randint(1,10)
+        else if(randomX == 3 and randomY == 4):
+            randomY = random.randint(1,10)
+            randomX = random.randint(1,10)
+        else if(randomX == 2 or randomX == 3 or randomX == 4 and randomY == 10):
+            randomY = random.randint(1,10)
+            randomX = random.randint(1,10)
+        else:
+            random_goed == True
