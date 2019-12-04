@@ -2,14 +2,12 @@ import random
 uitslag1 = False
 uitslag2 = False
 uitslag3 = False
+uitslag4 = False
+uitslag5 = False
+uitslag6 = False
 
-while(uitslag1 == False or uitslag2 == False or uitslag3 == False):
-    uitslag1 = False
-    uitslag2 = False
-    uitslag3 = False
+while(uitslag1 == False or uitslag2 == False or uitslag3 == False or uitslag4 == False or uitslag5 == False):
     print(" ")
-    
-    
     icetown_goals = 5
     icetown_against = 1
     icetown_wins = 2
@@ -30,59 +28,86 @@ while(uitslag1 == False or uitslag2 == False or uitslag3 == False):
     coldbury_wins = 1
     coldbury_losses = 2
 
-    total_matches = 6
-    
     wedstrijden: ["Icetown win", "Icetown win", "Icetown loss", "Frostville win", "Frostville win", "Frostville loss", "Glacierhampton win", "Glacierhampton loss", "Glacierhampton loss", "Coldbuty win", "Coldbury loss", "Coldbury loss"]
     uitslagenlinks = []
     uitslagenrechts = []
-    #icetown vs (1 = frostville, 2 = glacierhampton, 3 = coldbury)
+
     icevsfrost = False
     icevsglacier = False
     icevscold = False
-    while(icevsfrost == False or icevsglacier == False or icevscold == False):
-        gescoord = random.randint(0,icetown_goals)
+    frostvsglacier = False
+    frostvscold = False
+    coldvsglacier = False
+
+    uitslag1 = False
+    uitslag2 = False
+    uitslag3 = False
+    uitslag4 = False
+    uitslag5 = False
+    uitslag6 = False
+
+    match1 = ""
+    match2 = ""
+    match3 = ""
+    match4 = ""
+    match5 = ""
+    match6 = ""
+
+    goed = False
+    while(icevsfrost == False or icevsglacier == False or icevscold == False or frostvsglacier == False or frostvscold == False):
+        gescoord = random.randint(0, icetown_goals)
         tegen = random.randint(0, icetown_against)
         
         #icetown win 1
-        if(gescoord > tegen and uitslag1 == False and gescoord != 5):
+        if(gescoord > tegen and uitslag1 == False and gescoord != icetown_goals and tegen != icetown_against):
             tegenstander = random.randint(1,3)
 
             #icetown vs frostville
-            if(tegenstander == 1 and icevsfrost == False and frostville_against - gescoord > 0 and frostville_goals - tegen > 0):
-                print("ICE VS FROST: " + str(gescoord) + ":" + str(tegen))
+            if(tegenstander == 1 and icevsfrost == False and frostville_against - gescoord >= 0 and frostville_goals - tegen >= 0):
+                print("ICE VS FROST 1: " + str(gescoord) + ":" + str(tegen))
+                match1 = "IvsF"
                 uitslagenlinks.append(gescoord)
                 uitslagenrechts.append(tegen)
                 icetown_goals = icetown_goals - gescoord
                 icetown_against = icetown_against - tegen
+                icetown_wins = icetown_wins - 1
                 frostville_goals = frostville_goals - tegen
                 frostville_against = frostville_against - gescoord
+                frostville_losses = frostville_losses - 1
                 uitslag1 = True
                 icevsfrost = True
                 gescoord = random.randint(0,icetown_goals)
                 tegen = random.randint(0, icetown_against)  
             
             #icetown vs glacierhampton
-            elif(tegenstander == 2 and icevsglacier == False and glacierhampton_against - gescoord > 0 and glacierhampton_goals - tegen > 0):
-                print("ICE VS GLACIER: " + str(gescoord) + ":" + str(tegen))
+            elif(tegenstander == 2 and icevsglacier == False and glacierhampton_against - gescoord >= 0 and glacierhampton_goals - tegen >= 0):
+                print("ICE VS GLACIER 1: " + str(gescoord) + ":" + str(tegen))
+                match1 = "IvsG"
                 uitslagenlinks.append(gescoord)
                 uitslagenrechts.append(tegen)
                 icetown_goals = icetown_goals - gescoord
                 icetown_against = icetown_against - tegen
+                icetown_wins = icetown_wins - 1
                 glacierhampton_goals = glacierhampton_goals - tegen
                 glacierhampton_against = glacierhampton_goals - gescoord
+                glacierhampton_losses = glacierhampton_losses - 1
                 uitslag1 = True
                 icevsglacier = True
                 gescoord = random.randint(0,icetown_goals)
                 tegen = random.randint(0, icetown_against)
 
-            elif(tegenstander == 2 and icevscold == False and coldbury_against - gescoord > 0 and coldbury_goals - tegen > 0):
-                print("ICE VS COLD: " + str(gescoord) + ":" + str(tegen))
+            #icetown vs coldbury
+            elif(tegenstander == 2 and icevscold == False and coldbury_against - gescoord >= 0 and coldbury_goals - tegen >= 0):
+                print("ICE VS COLD 1: " + str(gescoord) + ":" + str(tegen))
+                match1 = "IvsC"
                 uitslagenlinks.append(gescoord)
                 uitslagenrechts.append(tegen)
                 icetown_goals = icetown_goals - gescoord
                 icetown_against = icetown_against - tegen
+                icetown_wins = icetown_wins - 1
                 coldbury_goals = coldbury_goals - tegen
                 coldbury_against = coldbury_goals - gescoord
+                coldbury_losses = coldbury_losses - 1
                 uitslag1 = True
                 icevscold = True
                 gescoord = random.randint(0,icetown_goals)
@@ -92,45 +117,55 @@ while(uitslag1 == False or uitslag2 == False or uitslag3 == False):
                 tegen = random.randint(0, icetown_against)
         
         #icetown win 2
-        if(gescoord > tegen and uitslag2 == False and uitslag1 == True):
+        if(gescoord > tegen and uitslag2 == False and uitslag1 == True and tegen != icetown_against):
             tegenstander = random.randint(1,3)
                 
             #icetown vs frostville
-            if(tegenstander == 1 and icevsfrost == False and frostville_against - gescoord > 0 and frostville_goals - tegen > 0):
+            if(tegenstander == 1 and icevsfrost == False and frostville_against - gescoord >= 0 and frostville_goals - tegen >= 0):
                 print("ICE VS FROST: " + str(icetown_goals) + ":" + str(tegen))
+                match2 = "IvsF"
                 uitslagenlinks.append(icetown_goals)
                 uitslagenrechts.append(tegen)
                 icetown_goals = 0
                 icetown_against = icetown_against - tegen
+                icetown_wins = icetown_wins - 1
                 frostville_goals = frostville_goals - tegen
                 frostville_against = frostville_against - gescoord
+                frostville_losses = frostville_losses - 1
                 uitslag2 = True
                 icevsfrost = True
                 gescoord = random.randint(0,icetown_goals)
                 tegen = random.randint(0, icetown_against)  
             
             #icetown vs glacierhampton
-            elif(tegenstander == 2 and icevsglacier == False and glacierhampton_against - gescoord > 0 and glacierhampton_goals - tegen > 0):
+            elif(tegenstander == 2 and icevsglacier == False and glacierhampton_against - gescoord >= 0 and glacierhampton_goals - tegen >= 0):
                 print("ICE VS GLACIER: " + str(icetown_goals) + ":" + str(tegen))
+                match2 = "IvsG"
                 uitslagenlinks.append(icetown_goals)
                 uitslagenrechts.append(tegen)
                 icetown_goals = 0
                 icetown_against = icetown_against - tegen
+                icetown_wins = icetown_wins - 1
                 glacierhampton_goals = glacierhampton_goals - tegen
                 glacierhampton_against = glacierhampton_goals - gescoord
+                glacierhampton_losses = glacierhampton_losses - 1
                 uitslag2 = True
                 icevsglacier = True
                 gescoord = random.randint(0,icetown_goals)
                 tegen = random.randint(0, icetown_against)
-
-            elif(tegenstander == 2 and icevscold == False and coldbury_against - gescoord > 0 and coldbury_goals - tegen > 0):
+            
+            #icetown vs coldbury
+            elif(tegenstander == 2 and icevscold == False and coldbury_against - gescoord >= 0 and coldbury_goals - tegen >= 0):
                 print("ICE VS COLD: " + str(icetown_goals) + ":" + str(tegen))
+                match2 = "IvsC"
                 uitslagenlinks.append(icetown_goals)
                 uitslagenrechts.append(tegen)
                 icetown_goals = 0
                 icetown_against = icetown_against - tegen
+                icetown_wins = icetown_wins - 1
                 coldbury_goals = coldbury_goals - tegen
                 coldbury_against = coldbury_goals - gescoord
+                coldbury_losses = coldbury_losses - 1
                 uitslag2 = True
                 icevscold = True
                 gescoord = random.randint(0,icetown_goals)
@@ -142,17 +177,197 @@ while(uitslag1 == False or uitslag2 == False or uitslag3 == False):
         
         #icetown loss 1
         if(gescoord < tegen and uitslag3 == False and uitslag1 == True and uitslag2 == True):
-            uitslagen.append(str(gescoord) + str(tegen))
-            icetown_goals = icetown_goals - gescoord
-            icetown_against = icetown_against - tegen
-            uitslag3 = True
+            tegenstander = random.randint(1,3)
 
+            #icetown vs frostville
+            if(tegenstander == 1 and icevsfrost == False and frostville_against - gescoord >= 0 and frostville_goals - tegen >= 0):
+                print("ICE VS FROST: " + str(gescoord) + ":" + str(tegen))
+                match3 = "IvsF"
+                uitslagenlinks.append(gescoord)
+                uitslagenrechts.append(tegen)
+                icetown_goals = icetown_goals - gescoord
+                icetown_against = icetown_against - tegen
+                icetown_losses = icetown_losses - 1
+                frostville_goals = frostville_goals - tegen
+                frostville_against = frostville_against - gescoord
+                frostville_wins = frostville_wins - 1
+                uitslag3 = True
+                icevsfrost = True
+                gescoord = random.randint(0,icetown_goals)
+                tegen = random.randint(0, icetown_against)  
+            
+            #icetown vs glacierhampton
+            elif(tegenstander == 2 and icevsglacier == False and glacierhampton_against - gescoord >=0 and glacierhampton_goals - tegen >= 0):
+                print("ICE VS GLACIER: " + str(gescoord) + ":" + str(tegen))
+                match3 = "IvsG"
+                uitslagenlinks.append(gescoord)
+                uitslagenrechts.append(tegen)
+                icetown_goals = icetown_goals - gescoord
+                icetown_against = icetown_against - tegen
+                icetown_losses = icetown_losses - 1
+                glacierhampton_goals = glacierhampton_goals - tegen
+                glacierhampton_against = glacierhampton_goals - gescoord
+                glacierhampton_wins = glacierhampton_wins - 1
+                uitslag3 = True
+                icevsglacier = True
+                gescoord = random.randint(0,icetown_goals)
+                tegen = random.randint(0, icetown_against)
 
-#print(uitslagen)
+            elif(tegenstander == 2 and icevscold == False and coldbury_against - gescoord >= 0 and coldbury_goals - tegen >= 0):
+                print("ICE VS COLD: " + str(gescoord) + ":" + str(tegen))
+                match2 = "IvsC"
+                uitslagenlinks.append(gescoord)
+                uitslagenrechts.append(tegen)
+                icetown_goals = icetown_goals - gescoord
+                icetown_against = icetown_against - tegen
+                icetown_losses = icetown_losses - 1
+                coldbury_goals = coldbury_goals - tegen
+                coldbury_against = coldbury_goals - gescoord
+                coldbury_wins = coldbury_wins - 1
+                uitslag3 = True
+                icevscold = True
+                gescoord = random.randint(0,icetown_goals)
+                tegen = random.randint(0, icetown_against)
+            else:
+                gescoord = random.randint(0,icetown_goals)
+                tegen = random.randint(0, icetown_against)
 
-#okeee zo moet het dus nu
-#voor elke club is er natuurlijk gezegd hoeveel wins en losses
-#elke keer als een random club wint, dan haalt ie een loss van een random partij af waartegen nog niet gespeeld is (misschien met een array ofzo)
-#en dan haal je goals tegen en voor bij de tegenstander weg, en dan hoef je maar 6 simulaties te runnen
-#als dat allemaal gedaan is dan checkt ie of verschillende dingen twee keer voorkomen
-#en dan iets doen om het antwoord te krijgen
+    
+    
+    
+    
+    gescoord = random.randint(0, frostville_goals)
+    tegen = random.randint(0, frostville_against)
+    
+    #frostville wins both
+    if(frostville_wins == 2 and gescoord > tegen and frostville_goals - gescoord > frostville_against - tegen):
+        tegenstander = random.randint(1,2) #1 = glacier and #2 is cold
+        
+        #frostville vs glacier
+        if(tegenstander == 1 and gescoord != frostville_goals and tegen != frostville_against and glacierhampton_goals - tegen >= 0 and glacierhampton_against - gescoord >= 0 and coldbury_goals - tegen >= 0 and coldbury_against - gescoord >= 0):
+            print("FROST VS GLACIER: " + str(gescoord) + ":" + str(tegen))
+            match4 = "FvsG"
+            uitslagenlinks.append(gescoord)
+            uitslagenrechts.append(tegen)
+            frostville_goals = frostville_goals - gescoord
+            frostville_against = frostville_against - tegen
+            frostville_wins = frostville_wins - 1
+            glacierhampton_goals = glacierhampton_goals - tegen
+            glacierhampton_against = glacierhampton_against - gescoord
+            glacierhampton_losses = 0
+            uitslag4 = True
+            frostvsglacier = True
+            
+            gescoord = frostville_goals
+            tegen = frostville_against
+            
+            print("FROST VS COLD: " + str(gescoord) + ":" + str(tegen))
+            match4 = "FvsC"
+            uitslagenlinks.append(gescoord)
+            uitslagenrechts.append(tegen)
+            frostville_goals = 0
+            frostville_against = 0
+            frostville_wins = 0
+            coldbury_goals = coldbury_goals - tegen
+            coldbury_against = coldbury_against - gescoord
+            coldbury_losses = 0
+            uitslag5 = True
+            frostvscold = True
+        
+        #frostville vs coldbury
+        elif(tegenstander == 2 and gescoord != frostville_goals and tegen != frostville_against and glacierhampton_goals - tegen >= 0 and glacierhampton_against - gescoord >= 0 and coldbury_goals - tegen >= 0 and coldbury_against - gescoord >= 0):
+            print("FROST VS COLD: " + str(gescoord) + ":" + str(tegen))
+            match4 = "FvsC"
+            uitslagenlinks.append(gescoord)
+            uitslagenrechts.append(tegen)
+            frostville_goals = 0
+            frostville_against = 0
+            frostville_wins = 0
+            coldbury_goals = coldbury_goals - tegen
+            coldbury_against = coldbury_against - gescoord
+            coldbury_losses = 0
+            uitslag4 = True
+            frostvscold = True
+            gescoord = frostville_goals
+            tegen = frostville_against
+            
+            print("FROST VS GLACIER: " + str(gescoord) + ":" + str(tegen))
+            match5 = "FvsG"
+            uitslagenlinks.append(gescoord)
+            uitslagenrechts.append(tegen)
+            frostville_goals = frostville_goals - gescoord
+            frostville_against = frostville_against - tegen
+            frostville_wins = frostville_wins - 1
+            glacierhampton_goals = glacierhampton_goals - tegen
+            glacierhampton_against = glacierhampton_against - gescoord
+            glacierhampton_losses = 0
+            uitslag5 = True
+            frostvsglacier = True
+            
+
+        
+    elif(frostville_wins == 1 and gescoord > tegen):
+        if(tegen != frostville_against and glacierhampton_goals - tegen >= 0 and glacierhampton_against - gescoord >= 0 and coldbury_wins > 0 and coldbury_goals - tegen >= 0 and coldbury_against - gescoord >= 0):
+            print("FROST VS GLACIER: " + str(gescoord) + ":" + str(tegen))
+            match4 = "FvsG"
+            uitslagenlinks.append(gescoord)
+            uitslagenrechts.append(tegen)
+            frostville_goals = frostville_goals - gescoord
+            frostville_against = frostville_against - tegen
+            frostville_wins = 0
+            glacierhampton_goals = glacierhampton_goals - tegen
+            glacierhampton_against = glacierhampton_against - gescoord
+            glacierhampton_losses = 0
+            uitslag4 = True
+            frostvsglacier = True
+            gescoord = frostville_goals
+            tegen = frostville_against
+
+            print("FROST VS COLD: " + str(gescoord) + ":" + str(tegen))
+            match4 = "FvsC"
+            uitslagenlinks.append(gescoord)
+            uitslagenrechts.append(tegen)
+            frostville_goals = 0
+            frostville_against = 0
+            frostville_losses = 0
+            coldbury_goals = coldbury_goals - tegen
+            coldbury_against = coldbury_against - gescoord
+            coldbury_wins = 0
+            uitslag5 = True
+            frostvscold = True
+        
+        elif(tegen != frostville_against and coldbury_goals - tegen >= 0 and coldbury_against - gescoord >= 0 and glacierhampton_wins > 0 and coldbury_goals - tegen >= 0 and coldbury_against - gescoord >= 0):
+            print("FROST VS COLD: " + str(gescoord) + ":" + str(tegen))
+            match4 = "FvsC"
+            uitslagenlinks.append(gescoord)
+            uitslagenrechts.append(tegen)
+            frostville_goals = frostville_goals - gescoord
+            frostville_against = frostville_against - tegen
+            frostville_wins = 0
+            coldbury_goals = coldbury_goals - tegen
+            coldbury_against = coldbury_against - gescoord
+            coldbury_losses = 0
+            uitslag4 = True
+            frostvscold = True
+            gescoord = frostville_goals
+            tegen = frostville_against
+
+            print("FROST VS GLACIER: " + str(gescoord) + ":" + str(tegen))
+            match4 = "FvsG"
+            uitslagenlinks.append(gescoord)
+            uitslagenrechts.append(tegen)
+            frostville_goals = 0
+            frostville_against = 0
+            frostville_losses = 0
+            glacierhampton_goals = glacierhampton_goals - tegen
+            glacierhampton_against = glacierhampton_against - gescoord
+            glacierhampton_wins = 0
+            uitslag5 = True
+            frostvsglacier = True  
+        else:
+            gescoord = random.randint(0, frostville_goals)
+            tegen = random.randint(0, frostville_against)
+    else:
+        gescoord = random.randint(0, frostville_goals)
+        tegen = random.randint(0, frostville_against)
+            
